@@ -1,0 +1,97 @@
+    geti 33
+    set r1	# r1 = counter&
+    geti 34
+    set r2	# r2 = byteCounter&
+    geti 35
+    set r3	# r3 = contCounter&
+    geti 1
+    set r14	# r14 = 1
+    geti 248
+    set r13	# r13 = filter
+    geti 32
+    set r12	# r12 = 32
+    lw r12
+    and r13
+    set r11	# r11 = pattern
+    geti 0
+    sw r3	# M[35] = contCounter
+    geti 34
+    set r10
+    geti 0
+    sw r2	# M[34] = byteCounter
+    geti 33
+    set r10
+    geti 0
+    sw r1	# M[33] = counter
+    set r10	# r10 = i = 0
+    geti 31
+    set r12	# r12 = 31
+ploop:
+    geti 0
+    set r9	# r9 = byteCheck
+    set r8	# r8 = j
+byteloop:
+    get r15
+    lt r12
+    bf noCont
+    geti 4
+    add r8
+    set r7
+    lw r10
+    lsl r7
+    set r7
+    geti 4
+    sub r8
+    set r6
+    get r13
+    lsl r6
+    set r5
+    get r10
+    add r14
+    set r4
+    lw r4
+    and r5
+    lsr r6
+    add r7
+    eq r11
+    bf noCont
+    lw r15
+    add r14
+    sw r15
+noCont:
+    lw r10
+    lsl r8
+    and r13
+    eq r11
+    bf noCount
+    set r9	# byteCheck = 1
+    lw r15
+    add r14	# contCounter++
+    sw r15
+    lw r1
+    add r14	# counter++
+    sw r1
+noCount:
+    geti 4
+    set r15
+    get r8
+    add r14
+    set r8
+    lt r15
+    bt byteloop
+    get r9
+    eq r14
+    bf noBCount
+    lw r2
+    add r14
+    sw r2
+noBCount:
+    get r10
+    lt r12	# r9 = i < 31
+    set r9
+    get r10	
+    add r14
+    set r10	# i++
+    get r9
+    bt ploop	# branch if i < 32 (i-1 < 31)
+    halt

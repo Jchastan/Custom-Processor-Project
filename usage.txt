@@ -1,0 +1,12 @@
+You need to be able to run python code from the terminal to run the assembler since it runs in python.
+If you don't know how to do this, here's a youtube video, you are free to figure this out elsewhere: https://youtu.be/hnn682GS_J0
+Then, once in the directory that the .py file and the assembler code is in, simply run the code with the
+full filename of the assembly code first, followed by the full file name of the output file second as 
+arguments. The output file will be created if it doesn't exist beforehand. To be clear the syntax is as follows:
+python assembler.py program1.txt out1.txt
+
+since the program files are in each program folder, it should be used as follows:
+
+python assembler.py program1/program1.txt program1/out.txt
+
+with the program number for the program whose machine code should be generated being used.

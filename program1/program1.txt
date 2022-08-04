@@ -1,0 +1,239 @@
+    geti 1
+    set r15 # position bit = x + 1
+    set r14 # clear bit always should equal 1
+eLoop:
+    geti 2
+    set r11
+    lw r15
+    lsr r11
+    set r11	#d11
+    geti 1
+    set r10
+    lw r15
+    lsr r10
+    and r14
+    set r10	# d10
+    lw r15
+    and r14
+    set r9	# d9
+    get r15
+    sub r14
+    set r15	#position = x
+    geti 7
+    set r8
+    lw r15
+    lsr r8
+    and r14
+    set r8	#d8
+    geti 6
+    set r7
+    lw r15
+    lsr r7
+    and r14
+    set r7	#d7
+    geti 5
+    set r6
+    lw r15
+    lsr r6
+    and r14
+    set r6	#d6
+    geti 4
+    set r5
+    lw r15
+    lsr r5
+    and r14
+    set r5	#d5
+    geti 3
+    set r4
+    lw r14
+    lsr r4
+    and r14
+    set r4	#d4
+    geti 2
+    set r3
+    lw r15
+    lsr r3
+    and r14
+    set r3	#d3
+    geti 1
+    set r2
+    lw r15
+    lsr r2
+    and r14
+    set r2	#d2
+    lw r15
+    and r14
+    set r1	#d1
+    geti 31
+    add r15
+    set r15	#position = x + 31
+    geti 60
+    set r12
+    get r11
+    xor r9
+    xor r7
+    xor r5
+    xor r4
+    xor r2
+    xor r1
+    sw r12	#p1 = M[60]
+    geti 61
+    set r12
+    get r11
+    xor r10
+    xor r7
+    xor r6
+    xor r4
+    xor r3
+    xor r1
+    sw r12	#p2 = M[61]
+    geti 62
+    set r12
+    get r11
+    xor r10
+    xor r9
+    xor r8
+    xor r4
+    xor r3
+    xor r2
+    sw r12	#p4 = M[62]
+    geti 63
+    set r12
+    get r11
+    xor r10
+    xor r9
+    xor r8
+    xor r7
+    xor r6
+    xor r5
+    sw r12	#p8 = M[63]
+    xor r4
+    xor r3
+    xor r2
+    xor r1
+    set r13	#p0 = ^(d11:1)
+    lw r12
+    xor r13
+    set r13	#p0 = ^(d11:1,p8)
+    geti 62
+    set r12
+    lw r12
+    xor r13
+    set r13	#p0 = ^(d11:1,p8,p4)
+    geti 61
+    set r12
+    lw r12
+    xor r13
+    set r13	#p0 = ^(d11:1,p8,p4,p2)
+    geti 60
+    set r12
+    lw r12
+    xor r13
+    set r13	#p0 = ^(d11:1,p8,p4,p2,p1)
+    geti 7
+    set r12
+    get r11
+    lsl r12
+    set r11
+    geti 6
+    set r12
+    get r10
+    lsl r12
+    add r11
+    set r11
+    geti 5
+    set r12
+    get r9
+    lsl r12
+    add r11
+    set r11
+    geti 4
+    set r12
+    get r8
+    lsl r12
+    add r11
+    set r11
+    geti 3
+    set r12
+    get r7
+    lsl r12
+    add r11
+    set r11
+    geti 2
+    set r12
+    get r6
+    lsl r12
+    add r11
+    set r11
+    geti 1
+    set r12
+    get r5
+    lsl r12
+    add r11
+    set r11
+    geti 63
+    set r12
+    lw r12
+    add r11
+    sw r15
+    get r15
+    sub r14
+    set r15	#position = x + 30
+    geti 7
+    set r12
+    get r4
+    lsl r12
+    set r11
+    geti 6
+    set r12
+    get r3
+    lsl r12
+    add r11
+    set r11
+    geti 5
+    set r12
+    get r2
+    lsl r12
+    add r11
+    set r11
+    geti 4
+    set r12
+    geti 62
+    set r10
+    lw r10
+    lsl r12
+    add r11
+    set r11
+    geti 3
+    set r12
+    get r1
+    lsl r12
+    add r11
+    set r11
+    geti 2
+    set r12
+    geti 61
+    set r10
+    lw r10
+    lsl r12
+    add r11
+    set r11
+    geti 1
+    set r12
+    geti 60
+    set r10
+    lw r10
+    lsl r12
+    add r11
+    add r13
+    set r11
+    sw r15
+    geti 27
+    set r12
+    get r15
+    sub r12
+    set r15  #x = x + 2
+    geti 29
+    lt r15
+    bf eLoop
+    halt
